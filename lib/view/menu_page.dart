@@ -12,6 +12,7 @@ import 'package:muslim_app/view/shalat_page.dart';
 import 'package:muslim_app/viewmodel/shalat_view_model.dart';
 
 import 'package:muslim_app/view/catatan_ramadhan_page.dart';
+import 'package:muslim_app/view/quran_quote_card.dart';
 
 class RootPage extends StatefulWidget {
   const RootPage({super.key});
@@ -289,6 +290,8 @@ class MenuPage extends StatelessWidget {
                   _buildRamadhanCard(context),
                   const SizedBox(height: 16),
                   _buildGridMenu(context),
+                  const SizedBox(height: 16),
+                  const QuranQuoteCard(),
                   const SizedBox(height: 88),
                 ],
               ),
@@ -411,8 +414,6 @@ class MenuPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                
-                // Kolom Tengah: Hari Minggu (Sejajar dengan kolom kiri)
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -426,9 +427,8 @@ class MenuPage extends StatelessWidget {
                   ],
                 ),
                  
-                // Kolom Kanan: Ikon Jam
                 Container(
-                  margin: const EdgeInsets.only(top: 20), // Memberi sedikit jarak dari atas
+                  margin: const EdgeInsets.only(top: 20),
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
                     color: Color(0xFF546B41),
@@ -444,11 +444,10 @@ class MenuPage extends StatelessWidget {
             
             const Divider(height: 30, thickness: 1, color: Color(0xFFEEEEEE)),
 
-            // Bagian Ikon Shalat (Warni ikon disesuaikan tiap waktu shalat)
+            // Bagian Ikon Shalat 
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // Mengambil data dari objek 'schedule' yang dikirim dari ViewModel
                 _prayerTimeItem(
                   "Isya", 
                   schedule?.isya ?? "--:--", 
@@ -492,7 +491,6 @@ class MenuPage extends StatelessWidget {
     );
   }
 
-  // Update fungsi item agar ikon berwarna hijau tua seragam
   Widget _prayerTimeItem(String name, String time, IconData icon, Color bg, Color iconColor) {
     return Column(
       children: [
@@ -519,7 +517,7 @@ class MenuPage extends StatelessWidget {
         ),
         const SizedBox(height: 2),
         Text(
-          time, // Jam dari API akan muncul di sini
+          time, 
           style: TextStyle(
             fontSize: 11, 
             color: Colors.grey[600],
@@ -647,22 +645,6 @@ class MenuPage extends StatelessWidget {
       mainAxisSpacing: 12,
       childAspectRatio: 1.05,
       children: [
-        _gridItem(
-          context,
-          icon: Icons.menu_book,
-          title: 'Al-Quran',
-          iconColor: const Color(0xFF546B41),
-          bgColor: const Color.fromARGB(255, 226, 238, 208),
-          onTap: () => onNavigate(2),
-        ),
-        _gridItem(
-          context,
-          icon: Icons.bookmarks,
-          title: 'Doa',
-          iconColor: const Color(0xFF546B41),
-          bgColor: const Color.fromARGB(255, 226, 238, 208),
-          onTap: () => onNavigate(1),
-        ),
         _gridItem(
           context,
           icon: Icons.auto_awesome,

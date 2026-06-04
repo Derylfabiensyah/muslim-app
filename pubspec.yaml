@@ -34,5 +34,5 @@ flutter_launcher_icons:
   android: true
   ios: false
   image_path: "assets/muslim-logo.png"
-  adaptive_icon_background: "#546B41"
+  adaptive_icon_background: "#FFFFFF"
   adaptive_icon_foreground: "assets/muslim-logo.png"

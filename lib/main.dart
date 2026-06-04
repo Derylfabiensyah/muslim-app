@@ -26,6 +26,7 @@ import 'services/gemini_services.dart';
 import 'viewmodel/chat_view_model.dart';
 import 'viewmodel/catatan_ramadhan_viewmodel.dart';
 import 'viewmodel/tasbih_viewmodel.dart';
+import 'viewmodel/kiblat_viewmodel.dart';
 
 void main() async {
   // Pastikan Flutter binding sudah diinisialisasi
@@ -107,6 +108,11 @@ class MyApp extends StatelessWidget {
         // TASBIH
         ChangeNotifierProvider(
           create: (_) => TasbihViewModel(),
+        ),
+
+        // KIBLAT
+        ChangeNotifierProvider(
+          create: (_) => KiblatViewModel(),
         ),
       ],
       child: const MaterialApp(

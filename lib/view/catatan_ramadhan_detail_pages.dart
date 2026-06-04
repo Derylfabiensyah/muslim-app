@@ -472,7 +472,7 @@ class _CeramahTab extends StatelessWidget {
                       margin: const EdgeInsets.only(bottom: 12),
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: cardLight,
+                        color: Colors.white,
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: Column(
@@ -769,7 +769,7 @@ class _InfaqTab extends StatelessWidget {
                       margin: const EdgeInsets.only(bottom: 12),
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: cardLight,
+                        color: Colors.white,
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: Row(

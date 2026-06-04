@@ -40,7 +40,7 @@ class _ShalatPageState extends State<ShalatPage> {
             width: double.infinity,
             padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 16),
             decoration: const BoxDecoration(
-              color: Color(0xFF061E29),
+              color: Color(0xFF546B41),
               borderRadius: BorderRadius.vertical(
                 bottom: Radius.circular(24),
               ),

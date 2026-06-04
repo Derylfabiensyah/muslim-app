@@ -331,7 +331,7 @@ class MenuPage extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: Image.asset(
-                'assets/Minimalist_Muslim_app_logo,_crescent_202606012017.jpeg',
+                'assets/muslim-logo.png',
                 fit: BoxFit.contain,
               ),
             ),
@@ -645,7 +645,7 @@ class MenuPage extends StatelessWidget {
       crossAxisCount: 2,
       crossAxisSpacing: 12,
       mainAxisSpacing: 12,
-      childAspectRatio: 1.2,
+      childAspectRatio: 1.05,
       children: [
         _gridItem(
           context,
@@ -669,7 +669,7 @@ class MenuPage extends StatelessWidget {
           title: 'Asmaul Husna',
           iconColor: const Color(0xFF546B41),
           bgColor: const Color.fromARGB(255, 226, 238, 208),
-          onTap: () => onNavigate(4),
+          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const AsmaPage())),
         ),
         _gridItem(
           context,
@@ -677,7 +677,7 @@ class MenuPage extends StatelessWidget {
           title: 'Tasbih',
           iconColor: const Color(0xFF546B41),
           bgColor: const Color.fromARGB(255, 226, 238, 208),
-          onTap: () => onNavigate(5),
+          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const TasbihPage())),
         ),
         _gridItem(
           context,
@@ -685,7 +685,7 @@ class MenuPage extends StatelessWidget {
           title: 'Dzikir',
           iconColor: const Color(0xFF546B41),
           bgColor: const Color.fromARGB(255, 226, 238, 208),
-          onTap: () => onNavigate(7),
+          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const DzikirPage())),
         ),
         _gridItem(
           context,
@@ -693,7 +693,7 @@ class MenuPage extends StatelessWidget {
           title: 'Jadwal Shalat',
           iconColor: const Color(0xFF546B41),
           bgColor: const Color.fromARGB(255, 226, 238, 208),
-          onTap: () => onNavigate(6),
+          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ShalatPage())),
         ),
       ],
     );

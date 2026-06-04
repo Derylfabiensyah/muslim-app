@@ -23,24 +23,24 @@ class _AsmaPageState extends State<AsmaPage> {
     final vm = context.watch<AsmaViewModel>();
 
     return Scaffold(
-      backgroundColor: const Color(0xFFEEEEEE),
+      backgroundColor: const Color(0xFFF5F5F0),
       body: Column(
         children: [
           /// HEADER
           Container(
             width: double.infinity,
-            padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 16),
+            padding: const EdgeInsets.fromLTRB(12, 40, 16, 20),
             decoration: const BoxDecoration(
               color: Color(0xFF546B41),
               borderRadius: BorderRadius.vertical(
-                bottom: Radius.circular(24),
+                bottom: Radius.circular(28),
               ),
             ),
             child: Row(
               children: [
                 IconButton(
                   onPressed: () => Navigator.pop(context),
-                  icon: const Icon(Icons.arrow_back, color: Colors.white),
+                  icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white, size: 20),
                 ),
                 const SizedBox(width: 8),
                 const Expanded(
@@ -54,7 +54,7 @@ class _AsmaPageState extends State<AsmaPage> {
                     ),
                   ),
                 ),
-                const SizedBox(width: 48),
+                const SizedBox(width: 48), // spacer
               ],
             ),
           ),
@@ -62,61 +62,109 @@ class _AsmaPageState extends State<AsmaPage> {
           /// CONTENT
           Expanded(
             child: vm.isLoading
-                ? const Center(child: CircularProgressIndicator())
+                ? const Center(
+                    child: CircularProgressIndicator(
+                      color: Color(0xFF546B41),
+                    ),
+                  )
                 : vm.error != null
-                    ? Center(child: Text(vm.error!))
+                    ? Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              vm.error!,
+                              style: const TextStyle(color: Colors.redAccent),
+                            ),
+                            const SizedBox(height: 12),
+                            ElevatedButton(
+                              onPressed: () => context.read<AsmaViewModel>().getAsma(),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFF546B41),
+                                foregroundColor: Colors.white,
+                              ),
+                              child: const Text("Coba Lagi"),
+                            ),
+                          ],
+                        ),
+                      )
                     : ListView.builder(
+                        padding: const EdgeInsets.only(bottom: 24, top: 8),
                         itemCount: vm.asmaList.length,
                         itemBuilder: (context, index) {
                           final asma = vm.asmaList[index];
 
-                          return Card(
-                            color: Colors.white,
-                            elevation: 2,
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: 12, vertical: 8),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15)),
+                          return Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(18),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withValues(alpha: 0.03),
+                                  blurRadius: 8,
+                                  offset: const Offset(0, 4),
+                                ),
+                              ],
+                            ),
                             child: Padding(
                               padding: const EdgeInsets.all(16),
                               child: Row(
-                                // Gunakan Row agar nomor dan teks berjajar rapi
                                 children: [
-                                  CircleAvatar(
-                                    backgroundColor: Color(0xFF546B41),
-                                    child: Text("${index + 1}",
+                                  Container(
+                                    width: 36,
+                                    height: 36,
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFF546B41).withValues(alpha: 0.08),
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        "${index + 1}",
                                         style: const TextStyle(
-                                            color: Colors.white, fontSize: 12)),
+                                          color: Color(0xFF546B41),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                   const SizedBox(width: 16),
                                   Expanded(
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment
-                                          .end, // Arab di kanan
+                                      crossAxisAlignment: CrossAxisAlignment.end,
                                       children: [
                                         Text(
                                           asma.arab,
                                           style: const TextStyle(
-                                              fontSize: 26,
-                                              fontWeight: FontWeight.bold),
+                                            fontSize: 26,
+                                            fontWeight: FontWeight.bold,
+                                            color: Color(0xFF333333),
+                                          ),
                                         ),
-                                        const SizedBox(height: 4),
+                                        const SizedBox(height: 8),
                                         Align(
-                                          alignment: Alignment
-                                              .centerLeft, // Latin & Arti di kiri
+                                          alignment: Alignment.centerLeft,
                                           child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              Text(asma.latin,
-                                                  style: const TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      color: Colors.teal)),
-                                              Text(asma.arti,
-                                                  style: TextStyle(
-                                                      color: Colors.grey[600],
-                                                      fontSize: 12)),
+                                              Text(
+                                                asma.latin,
+                                                style: const TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Color(0xFF546B41),
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                              const SizedBox(height: 2),
+                                              Text(
+                                                asma.arti,
+                                                style: TextStyle(
+                                                  color: Colors.grey[600],
+                                                  fontSize: 12,
+                                                  height: 1.3,
+                                                ),
+                                              ),
                                             ],
                                           ),
                                         ),

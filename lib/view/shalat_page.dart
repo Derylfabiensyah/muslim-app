@@ -320,16 +320,31 @@ class _ShalatPageState extends State<ShalatPage> {
                               ],
                             ),
 
-                            const Divider(height: 24),
+                            const Divider(height: 20),
 
-                            _timeRow('Imsak', d.imsak, isToday),
-                            _timeRow('Subuh', d.subuh, isToday),
-                            _timeRow('Terbit', d.terbit, isToday),
-                            _timeRow('Dhuha', d.dhuha, isToday),
-                            _timeRow('Dzuhur', d.dzuhur, isToday),
-                            _timeRow('Ashar', d.ashar, isToday),
-                            _timeRow('Maghrib', d.maghrib, isToday),
-                            _timeRow('Isya', d.isya, isToday),
+                            Row(
+                              children: [
+                                Expanded(child: _timeBadge('Imsak', d.imsak, isToday)),
+                                const SizedBox(width: 8),
+                                Expanded(child: _timeBadge('Subuh', d.subuh, isToday)),
+                                const SizedBox(width: 8),
+                                Expanded(child: _timeBadge('Terbit', d.terbit, isToday)),
+                                const SizedBox(width: 8),
+                                Expanded(child: _timeBadge('Dhuha', d.dhuha, isToday)),
+                              ],
+                            ),
+                            const SizedBox(height: 8),
+                            Row(
+                              children: [
+                                Expanded(child: _timeBadge('Dzuhur', d.dzuhur, isToday)),
+                                const SizedBox(width: 8),
+                                Expanded(child: _timeBadge('Ashar', d.ashar, isToday)),
+                                const SizedBox(width: 8),
+                                Expanded(child: _timeBadge('Maghrib', d.maghrib, isToday)),
+                                const SizedBox(width: 8),
+                                Expanded(child: _timeBadge('Isya', d.isya, isToday)),
+                              ],
+                            ),
                           ],
                         ),
                       ),
@@ -344,25 +359,38 @@ class _ShalatPageState extends State<ShalatPage> {
     );
   }
 
-  Widget _timeRow(String label, String time, bool isToday) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  Widget _timeBadge(String label, String time, bool isToday) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
+      decoration: BoxDecoration(
+        color: isToday
+            ? const Color(0xFF546B41).withValues(alpha: 0.1)
+            : const Color(0xFFF9F9F7),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: isToday
+              ? const Color(0xFF546B41).withValues(alpha: 0.2)
+              : Colors.grey[200]!,
+          width: 1,
+        ),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             label,
             style: TextStyle(
-              fontSize: 13.5,
-              color: isToday ? const Color(0xFF3D5230) : const Color(0xFF555555),
-              fontWeight: isToday ? FontWeight.w500 : FontWeight.normal,
+              fontSize: 10.5,
+              fontWeight: FontWeight.w600,
+              color: isToday ? const Color(0xFF3D5230) : Colors.grey[600],
             ),
           ),
+          const SizedBox(height: 4),
           Text(
             time.isEmpty ? '-' : time,
             style: TextStyle(
+              fontSize: 13,
               fontWeight: FontWeight.bold,
-              fontSize: 14,
               color: isToday ? const Color(0xFF546B41) : const Color(0xFF333333),
             ),
           ),

@@ -37,13 +37,44 @@ class CatatanRamadhanPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: const Color(0xFFEEEEEE),
-      appBar: AppBar(
-        title: const Text('Catatan Ramadhan'),
-        backgroundColor: const Color(0xFF546B41),
-        foregroundColor: Colors.white,
-        elevation: 0,
-      ),
-      body: ListView(
+      body: Column(
+        children: [
+          /// HEADER
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.fromLTRB(12, 40, 16, 20),
+            decoration: const BoxDecoration(
+              color: Color(0xFF546B41),
+              borderRadius: BorderRadius.vertical(
+                bottom: Radius.circular(28),
+              ),
+            ),
+            child: Row(
+              children: [
+                IconButton(
+                  onPressed: () => Navigator.pop(context),
+                  icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white, size: 20),
+                ),
+                const SizedBox(width: 8),
+                const Expanded(
+                  child: Text(
+                    "Catatan Ramadhan",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 48), // spacer
+              ],
+            ),
+          ),
+
+          /// CONTENT
+          Expanded(
+            child: ListView(
         padding: const EdgeInsets.all(16),
         children: [
           _buildMenuCard(
@@ -184,6 +215,9 @@ class CatatanRamadhanPage extends StatelessWidget {
                       color: Colors.grey[500],
                     ),
                   ),
+          ),
+        ],
+      ),
           ),
         ],
       ),

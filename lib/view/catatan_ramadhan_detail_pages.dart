@@ -11,87 +11,79 @@ const Color cardLight = Color(0xFFEAF2E0);
 // ─────────────────────────────────────────────
 //  MAIN PAGE  (tab container)
 // ─────────────────────────────────────────────
-class CatatanDetailPage extends StatefulWidget {
+class CatatanDetailPage extends StatelessWidget {
   final int initialTab;
   const CatatanDetailPage({super.key, this.initialTab = 0});
 
-  @override
-  State<CatatanDetailPage> createState() => _CatatanDetailPageState();
-}
-
-class _CatatanDetailPageState extends State<CatatanDetailPage>
-    with SingleTickerProviderStateMixin {
-  late TabController _tab;
-
-  @override
-  void initState() {
-    super.initState();
-    _tab = TabController(
-        length: 3, vsync: this, initialIndex: widget.initialTab);
+  String _getTitle() {
+    switch (initialTab) {
+      case 0:
+        return 'Laporan Shalat';
+      case 1:
+        return 'Laporan Ceramah';
+      case 2:
+        return 'Laporan Infaq';
+      default:
+        return 'Catatan';
+    }
   }
 
-  @override
-  void dispose() {
-    _tab.dispose();
-    super.dispose();
+  Widget _getBody() {
+    switch (initialTab) {
+      case 0:
+        return const _ShalatTab();
+      case 1:
+        return const _CeramahTab();
+      case 2:
+        return const _InfaqTab();
+      default:
+        return const _ShalatTab();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: bgColor,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black87,
-        elevation: 0,
-        centerTitle: false,
-        title: const Text(
-          'Catatan',
-          style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w700,
-              color: Colors.black87),
-        ),
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(52),
-          child: Container(
-            color: Colors.white,
-            child: TabBar(
-              controller: _tab,
-              labelColor: primaryColor,
-              unselectedLabelColor: Colors.grey[500],
-              indicatorColor: primaryColor,
-              indicatorWeight: 3,
-              labelStyle: const TextStyle(
-                  fontSize: 12, fontWeight: FontWeight.w600),
-              unselectedLabelStyle: const TextStyle(fontSize: 12),
-              tabs: const [
-                Tab(
-                  icon: Icon(Icons.check_box_outlined, size: 20),
-                  text: 'Shalat',
-                  iconMargin: EdgeInsets.only(bottom: 2),
+      body: Column(
+        children: [
+          /// HEADER
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.fromLTRB(12, 40, 16, 20),
+            decoration: const BoxDecoration(
+              color: Color(0xFF546B41),
+              borderRadius: BorderRadius.vertical(
+                bottom: Radius.circular(28),
+              ),
+            ),
+            child: Row(
+              children: [
+                IconButton(
+                  onPressed: () => Navigator.pop(context),
+                  icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white, size: 20),
                 ),
-                Tab(
-                  icon: Icon(Icons.menu_book, size: 20),
-                  text: 'Ceramah',
-                  iconMargin: EdgeInsets.only(bottom: 2),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    _getTitle(),
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
-                Tab(
-                  icon: Icon(Icons.volunteer_activism, size: 20),
-                  text: 'Infaq',
-                  iconMargin: EdgeInsets.only(bottom: 2),
-                ),
+                const SizedBox(width: 48), // spacer
               ],
             ),
           ),
-        ),
-      ),
-      body: TabBarView(
-        controller: _tab,
-        children: const [
-          _ShalatTab(),
-          _CeramahTab(),
-          _InfaqTab(),
+
+          /// CONTENT
+          Expanded(
+            child: _getBody(),
+          ),
         ],
       ),
     );

@@ -382,62 +382,86 @@ class MenuPage extends StatelessWidget {
             // Bagian Atas: Info Shalat & Hari
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start, // Menjaga elemen tetap rata atas
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Kolom Kiri: Menunjukkan waktu shalat berikutnya
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Icon(Icons.access_time_filled, size: 14, color: Color(0xFF546B41)),
-                        SizedBox(width: 4),
-                        Text(
-                          "Menjelang",
-                          style: TextStyle(
-                            color: Colors.grey[600],
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          const Icon(Icons.access_time_filled, size: 14, color: Color(0xFF546B41)),
+                          const SizedBox(width: 4),
+                          Text(
+                            "Menjelang",
+                            style: TextStyle(
+                              color: Colors.grey[600],
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      _upcomingPrayerLabel(schedule),
-                      style: const TextStyle(
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                        letterSpacing: -1,
+                        ],
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: 4),
+                      Text(
+                        _upcomingPrayerLabel(schedule),
+                        style: const TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                          letterSpacing: -0.5,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Hari", 
-                      style: TextStyle(color: Colors.grey[600], fontSize: 12, fontWeight: FontWeight.w500)),
-                    const SizedBox(height: 4),
-                    Text(
-                      _todayLabel,
-                      style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Colors.black, letterSpacing: -1),
-                    ),
-                  ],
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Hari", 
+                        style: TextStyle(
+                          color: Colors.grey[600], 
+                          fontSize: 12, 
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        _todayLabel,
+                        style: const TextStyle(
+                          fontSize: 28, 
+                          fontWeight: FontWeight.bold, 
+                          color: Colors.black, 
+                          letterSpacing: -0.5,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
                 ),
-                 
+                const SizedBox(width: 8),
                 Container(
-                  margin: const EdgeInsets.only(top: 20),
-                  padding: const EdgeInsets.all(12),
+                  margin: const EdgeInsets.only(top: 8),
+                  padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: Color(0xFF546B41),
+                    color: const Color(0xFF546B41),
                     shape: BoxShape.circle,
                     boxShadow: [
-                      BoxShadow(color: Colors.black.withValues(alpha: 0.1), blurRadius: 10, offset: const Offset(0, 4))
-                    ]
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.1), 
+                        blurRadius: 10, 
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
                   ),
-                  child: const Icon(Icons.mosque, color: Colors.white, size: 28),
+                  child: const Icon(Icons.mosque, color: Colors.white, size: 24),
                 )
               ],
             ),
